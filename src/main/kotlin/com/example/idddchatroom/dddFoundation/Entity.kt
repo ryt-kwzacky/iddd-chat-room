@@ -1,6 +1,4 @@
-package com.example.demo.domain
-
-import com.example.idddchatroom.dddFoundation.AbstractId
+package com.example.idddchatroom.dddFoundation
 
 abstract class Entity<DTO> {
     abstract val id: AbstractId

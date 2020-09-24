@@ -1,4 +1,4 @@
-package com.example.demo.domain
+package com.example.idddchatroom.dddFoundation
 
 import java.lang.IllegalStateException
 

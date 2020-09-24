@@ -1,4 +1,4 @@
-package com.example.demo.domain
+package com.example.idddchatroom.dddFoundation
 
 /**
  * This is an interface to extend to Enum class in domain layer.

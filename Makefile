@@ -2,8 +2,8 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 ### Variables ###
-DEV_DB_NAME := iddd_chatroom_dev
-TEST_DB_NAME := iddd_chatroom_test
+DEV_DB_NAME := iddd_chat_room_dev
+TEST_DB_NAME := iddd_chat_room_test
 
 ### Functions ###
 # Run docker container

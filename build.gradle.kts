@@ -1,6 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val springBootVersion by extra("2.3.2.RELEASE")
+val mysqlConnectorVersion by extra("8.0.21")
+
+val databaseURL by extra(System.getenv("DATASOURCE_DATABASE_URL") ?: "127.0.0.1:3306/iddd_chat_room_dev?characterEncoding=UTF8&connectionCollation=utf8mb4_bin&useSSL=false")
+val databaseHost by extra(System.getenv("DATASOURCE_DATABASE_HOST") ?: "127.0.0.1")
+val databasePort by extra(System.getenv("DATASOURCE_DATABASE_PORT") ?: "3306")
+val databaseName by extra(System.getenv("DATASOURCE_DATABASE_NAME") ?: "iddd_chat_room_dev")
+val databaseUser by extra(System.getenv("DATASOURCE_DATABASE_USERNAME") ?: "root")
+val databaseMigrationUser by extra(System.getenv("DATASOURCE_DATABASE_MIGRATION_USERNAME") ?: "root")
+val databasePassword by extra(System.getenv("DATASOURCE_DATABASE_PASSWORD") ?: "")
+val databaseQuery by extra(System.getenv("DATASOURCE_DATABASE_QUERY") ?: "?characterEncoding=UTF8&connectionCollation=utf8mb4_bin&useSSL=false")
 
 plugins {
 	id("org.springframework.boot") version "2.3.4.RELEASE"

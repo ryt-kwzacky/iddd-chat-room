@@ -52,7 +52,7 @@ dependencies {
 	 * @link https://github.com/mysql/mysql-connector-j
 	 */
 	implementation("mysql:mysql-connector-java:$mysqlConnectorVersion")
-	jooqGenerator("mysql:mysql-connector-java:${mysqlConnectorVersion}")
+	jooqGenerator("mysql:mysql-connector-java:$mysqlConnectorVersion")
 
 	/**
 	 * A migration tool.
@@ -71,7 +71,7 @@ dependencies {
 	 * Github
 	 * @link https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-starters/spring-boot-starter-jooq/build.gradle
 	 */
-	implementation("org.springframework.boot:spring-boot-starter-jooq:${springBootVersion}")
+	implementation("org.springframework.boot:spring-boot-starter-jooq:$springBootVersion")
 
 	/**
 	 * Firebase Admin SDK.
@@ -105,7 +105,7 @@ dependencies {
  */
 flyway {
 	// The jdbc url to use to connect to the database
-	url = "jdbc:mysql://${databaseURL}"
+	url = "jdbc:mysql://$databaseURL"
 	// The user to use to connect to the database
 	user = databaseMigrationUser
 	// The password to use to connect to the database
@@ -131,7 +131,7 @@ jooq {
 				logging = org.jooq.meta.jaxb.Logging.DEBUG
 				jdbc.apply {
 					driver = "com.mysql.cj.jdbc.Driver"
-					url = "jdbc:mysql://${databaseURL}"
+					url = "jdbc:mysql://$databaseURL"
 					user = databaseUser
 					password = databasePassword
 				}
@@ -151,6 +151,7 @@ jooq {
 						/**
 						 * Package name for generated files.
 						 */
+						//packageName = "com.example.$projectName.db.generatedJooqCode"
 						packageName = "com.example.$projectName.db.generatedJooqCode"
 						/**
 						 * Directory to put generated files on.

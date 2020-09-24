@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val springBootVersion by extra("2.3.2.RELEASE")
 val mysqlConnectorVersion by extra("8.0.21")
 
+val projectName by extra("idddchatroom")
 val databaseURL by extra(System.getenv("DATASOURCE_DATABASE_URL") ?: "127.0.0.1:3306/iddd_chat_room_dev?characterEncoding=UTF8&connectionCollation=utf8mb4_bin&useSSL=false")
 val databaseHost by extra(System.getenv("DATASOURCE_DATABASE_HOST") ?: "127.0.0.1")
 val databasePort by extra(System.getenv("DATASOURCE_DATABASE_PORT") ?: "3306")
@@ -150,7 +151,7 @@ jooq {
 						/**
 						 * Package name for generated files.
 						 */
-						packageName = "com.example.idddchatroom.db.generatedJooqCode"
+						packageName = "com.example.$projectName.db.generatedJooqCode"
 						/**
 						 * Directory to put generated files on.
 						 */

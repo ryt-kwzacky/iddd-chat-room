@@ -15,7 +15,7 @@ class RoomLevel(private val value: Int): ValueObject<RoomLevel.DTO> {
     init {
         validateFields()
     }
-
+    
     fun isLowerThan(oldValue: RoomLevel): Boolean = this.value < oldValue.value
 
     private fun validateFields() {

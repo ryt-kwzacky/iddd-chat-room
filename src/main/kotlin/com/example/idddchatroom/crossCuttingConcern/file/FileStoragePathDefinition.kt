@@ -18,7 +18,7 @@ object FileStoragePathDefinition {
     object UserAccount {
         private const val aggregateName = "user-account"
 
-        object UserProfileImage {
+        object IconImage {
             /**
              * Private fields
              */
@@ -36,10 +36,10 @@ object FileStoragePathDefinition {
     /**
      * Definition of file in Message Aggregate
      */
-    object UserProfile {
+    object Message {
         private const val aggregateName = "message"
 
-        object OutputFile {
+        object AttachedImage {
             /**
              * Private fields
              */

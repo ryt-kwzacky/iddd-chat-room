@@ -16,6 +16,29 @@ class Message(
     private val sentDateTime: SentDateTime,
     private val targetMessageId: MessageId
 ) : Entity<Message.DTO>() {
+    fun edit(newText: MessageText, sender: MessageSender): Message {
+        // 時間を確認
+        require(sender.isMatchedWith(this.sender))
+        return copy(text = newText)
+    }
+
+    private fun copy(
+        text: MessageText = this.text,
+        image: AttachedImage = this.image,
+        roomId: RoomId = this.roomId,
+        sender: MessageSender = this.sender,
+        sentDateTime: SentDateTime = this.sentDateTime,
+        targetMessageId: MessageId = this.targetMessageId
+    ) = Message(
+        id = id,
+        text = text,
+        image = image,
+        roomId = roomId,
+        sender = sender,
+        sentDateTime = sentDateTime,
+        targetMessageId = targetMessageId
+    )
+
     override fun toDTO(): DTO = DTO(
         id = id,
         text = text.toDTO(),

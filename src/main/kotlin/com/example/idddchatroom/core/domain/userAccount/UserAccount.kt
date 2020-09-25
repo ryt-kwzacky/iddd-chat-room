@@ -13,7 +13,7 @@ class UserAccount(
 ) : Entity<UserAccount.DTO>() {
 
     override fun toDTO(): DTO = DTO(
-        id = this.id,
+        id = id,
         userName = userName.toDTO(),
         icon = iconImage.toDTO()
     )

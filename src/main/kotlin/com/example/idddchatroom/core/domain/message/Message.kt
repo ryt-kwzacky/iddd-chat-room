@@ -2,6 +2,10 @@ package com.example.idddchatroom.core.domain.message
 
 import com.example.idddchatroom.core.domain.room.RoomId
 
+/**
+ * ユビキタス言語:
+ * メッセージ
+ */
 class Message(
     val id: MessageId,
     private val text: MessageText,

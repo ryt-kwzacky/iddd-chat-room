@@ -8,7 +8,7 @@ import com.example.idddchatroom.dddFoundation.Entity
  * メッセージ
  */
 class Message(
-    val id: MessageId,
+    override val id: MessageId,
     private val text: MessageText,
     private val image: AttachedImage,
     private val roomId: RoomId,

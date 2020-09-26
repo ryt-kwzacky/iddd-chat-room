@@ -9,7 +9,7 @@ import com.example.idddchatroom.dddFoundation.ValueObject
  * ルームオーナー
  */
 class RoomOwner(private val value: UniversalUserId): ValueObject<RoomOwner.DTO> {
-    fun isMatchedWith(user: RoomOwner): Boolean = this.value == user.value
+    fun isOwner(user: RoomOwner): Boolean = this.value == user.value
 
     override fun toDTO(): DTO = DTO(value = value)
 

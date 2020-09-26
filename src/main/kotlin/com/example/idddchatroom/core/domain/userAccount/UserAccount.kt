@@ -11,6 +11,18 @@ class UserAccount(
     private val userName: UserName,
     private val iconImage: IconImage
 ) : Entity<UserAccount.DTO>() {
+    companion object {
+        fun create(
+            universalUserId: UniversalUserId,
+            userName: UserName,
+            iconImage: IconImage
+        ) =
+            UserAccount(
+                id = universalUserId,
+                userName = userName,
+                iconImage = iconImage
+            )
+    }
 
     override fun toDTO(): DTO = DTO(
         id = id,

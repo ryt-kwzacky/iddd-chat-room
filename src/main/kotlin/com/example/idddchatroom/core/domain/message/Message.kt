@@ -16,9 +16,10 @@ class Message(
     private val sentDateTime: SentDateTime,
     private val targetMessageId: MessageId
 ) : Entity<Message.DTO>() {
-    fun edit(newText: MessageText, sender: MessageSender): Message {
-        // 時間を確認
-        require(sender.isMatchedWith(this.sender))
+    fun edit(newText: MessageText, sender: MessageSender, currentDateTime: SentDateTime): Message {
+        require(
+            sender.isMatchedWith(this.sender) && currentDateTime.isWithinEditableTimeFrom(this.sentDateTime)
+        )
         return copy(text = newText)
     }
 

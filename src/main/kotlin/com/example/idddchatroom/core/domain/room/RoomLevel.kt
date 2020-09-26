@@ -16,6 +16,8 @@ class RoomLevel(private val value: Int): ValueObject<RoomLevel.DTO> {
         validateFields()
     }
 
+    fun isLowerThan(oldValue: RoomLevel): Boolean = this.value < oldValue.value
+
     private fun validateFields() {
         require(value in MIN_NUMBER..MAX_NUMBER) {
             "$value is invalid in ${this::class}"

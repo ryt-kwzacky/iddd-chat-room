@@ -1,6 +1,5 @@
 package com.example.idddchatroom.core.domain.room
 
-import com.example.idddchatroom.core.domain.message.SentDateTime
 import com.example.idddchatroom.dddFoundation.ValueObject
 import java.time.Duration
 import java.time.ZonedDateTime

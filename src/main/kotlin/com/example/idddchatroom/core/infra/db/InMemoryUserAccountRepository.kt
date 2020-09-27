@@ -5,7 +5,6 @@ import com.example.idddchatroom.dddFoundation.FindResult
 import com.example.idddchatroom.sharedKernel.InMemoryBaseRepository
 import com.example.idddchatroom.sharedKernel.RandomIdentityFactory
 
-
 class InMemoryUserAccountRepository : UserAccountRepository {
     private val repository = InMemoryBaseRepository<UserAccount>()
 

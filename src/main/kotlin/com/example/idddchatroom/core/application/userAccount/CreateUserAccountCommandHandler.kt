@@ -5,7 +5,7 @@ import com.example.idddchatroom.core.domain.userAccount.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-@Service
+//@Service
 class CreateUserAccountCommandHandler(
     @Autowired private val userAccountRepository: UserAccountRepository
 ) {

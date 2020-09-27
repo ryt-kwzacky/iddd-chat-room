@@ -7,7 +7,7 @@ import com.example.idddchatroom.dddFoundation.ValueObject
  * ユビキタス言語:
  * アイコンイメージ
  */
-class IconImage(private val path: String): ValueObject<IconImage.DTO> {
+class IconImage(private val path: String) : ValueObject<IconImage.DTO> {
     companion object {
         const val PATH_FORMAT = FileStoragePathDefinition.UserAccount.IconImage.filePathFormat
     }
@@ -17,7 +17,7 @@ class IconImage(private val path: String): ValueObject<IconImage.DTO> {
     }
 
     private fun validateState() {
-        require(PATH_FORMAT.toRegex().matches(path)) { "$path is invalid path format." }
+        require(PATH_FORMAT.toRegex().matches(path)) { "$path is invalid path format. $PATH_FORMAT" }
     }
 
     override fun toDTO(): DTO = DTO(path)

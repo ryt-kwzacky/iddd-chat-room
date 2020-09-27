@@ -7,7 +7,7 @@ import com.example.idddchatroom.dddFoundation.ValueObject
  * ユビキタス言語:
  * アイコンイメージ
  */
-class IconImage(private val path: String): ValueObject<IconImage.DTO> {
+class IconImage(private val path: String) : ValueObject<IconImage.DTO> {
     companion object {
         const val PATH_FORMAT = FileStoragePathDefinition.UserAccount.IconImage.filePathFormat
     }

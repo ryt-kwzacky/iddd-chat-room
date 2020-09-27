@@ -22,7 +22,7 @@ object UserAccountFactory {
     fun genIconImage(): IconImage =
         IconImage(
             FileStoragePathDefinition.UserAccount.IconImage.baseDirectoryPath +
-                UUID.randomUUID().toString().replace("-", "") +
+                TestDataGenerator.genRandomFileName() +
                 ".jpeg"
         )
 }

@@ -40,7 +40,7 @@ class CreateUserAccountCommandHandlerTests {
         assertThat(userAccountRepository.count()).isEqualTo(0)
 
         /**
-         * Perform useCase
+         * Perform commandHandler
          */
         val createdUserAccountId = commandHandler.handle(command)
 

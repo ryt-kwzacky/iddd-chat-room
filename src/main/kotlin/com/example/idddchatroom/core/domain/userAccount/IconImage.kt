@@ -17,7 +17,7 @@ class IconImage(private val path: String) : ValueObject<IconImage.DTO> {
     }
 
     private fun validateState() {
-        require(PATH_FORMAT.toRegex().matches(path)) { "$path is invalid path format. $PATH_FORMAT" }
+        require(PATH_FORMAT.toRegex().matches(path)) { "$path is invalid path format." }
     }
 
     override fun toDTO(): DTO = DTO(path)

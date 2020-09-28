@@ -19,8 +19,8 @@ class CreateUserAccountCommandHandlerTests {
         userAccountRepository
     )
 
-    val userName = UserAccountFactory.genUserName()
-    val icon = UserAccountFactory.genIconImage()
+    private val userName = UserAccountFactory.genUserName()
+    private val icon = UserAccountFactory.genIconImage()
 
     @Before
     fun setUp() {

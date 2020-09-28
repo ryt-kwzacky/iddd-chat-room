@@ -24,10 +24,10 @@ class CreateRoomCommandHandlerTests {
         roomRepository
     )
 
-    val userAccount = UserAccountFactory.genUserAccount()
-    val universalUserId = userAccount.id
-    val roomName = RoomName(TestDataGenerator.genRandomLengthString(1..16))
-    val roomLevel = RoomLevel(TestDataGenerator.genRandomInt(0..100))
+    private val userAccount = UserAccountFactory.genUserAccount()
+    private val universalUserId = userAccount.id
+    private val roomName = RoomName(TestDataGenerator.genRandomLengthString(1..16))
+    private val roomLevel = RoomLevel(TestDataGenerator.genRandomInt(0..100))
 
     @Before
     fun setUp() {

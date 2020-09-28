@@ -1,6 +1,7 @@
 package com.example.idddchatroom.core.domain.message
 
 import com.example.idddchatroom.core.domain.room.RoomId
+import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 import com.example.idddchatroom.dddFoundation.Entity
 
 /**
@@ -14,10 +15,34 @@ class Message(
     private val roomId: RoomId,
     private val sender: MessageSender,
     private val sentDateTime: SentDateTime,
-    private val targetMessageId: MessageId
+    private val targetMessageId: MessageId?
 ) : Entity<Message.DTO>() {
-    fun edit(newText: MessageText, sender: MessageSender, currentDateTime: SentDateTime): Message {
+    companion object {
+        fun create(
+            id: MessageId,
+            text: MessageText,
+            image: AttachedImage,
+            roomId: RoomId,
+            sender: MessageSender,
+            targetMessageId: MessageId?
+        ) = Message(
+            id = id,
+            text = text,
+            image = image,
+            roomId = roomId,
+            sender = sender,
+            sentDateTime = SentDateTime.genCreatedDateTime(),
+            targetMessageId = targetMessageId
+        )
+    }
+
+    fun edit(
+        newText: MessageText,
+        sender: MessageSender,
+        currentDateTime: SentDateTime
+    ): Message {
         require(
+            // TODO: 権限管理をAOPでやる
             sender.isMatchedWith(this.sender) && currentDateTime.isWithinEditableTimeFrom(this.sentDateTime)
         )
         return copy(text = newText)
@@ -29,7 +54,7 @@ class Message(
         roomId: RoomId = this.roomId,
         sender: MessageSender = this.sender,
         sentDateTime: SentDateTime = this.sentDateTime,
-        targetMessageId: MessageId = this.targetMessageId
+        targetMessageId: MessageId? = this.targetMessageId
     ) = Message(
         id = id,
         text = text,
@@ -57,6 +82,6 @@ class Message(
         val roomId: RoomId,
         val sender: MessageSender.DTO,
         val sentDateTime: SentDateTime.DTO,
-        val targetMessageId: MessageId
+        val targetMessageId: MessageId?
     )
 }

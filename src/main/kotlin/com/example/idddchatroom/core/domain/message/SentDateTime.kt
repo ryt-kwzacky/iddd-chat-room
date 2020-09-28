@@ -10,6 +10,8 @@ import java.time.ZonedDateTime
  */
 class SentDateTime(private val value: ZonedDateTime) : ValueObject<SentDateTime.DTO> {
     companion object {
+        fun genCreatedDateTime() = SentDateTime(ZonedDateTime.now())
+
         // 15分（15 * 60秒）
         const val EDITABLE_TIME_LIMIT = 15 * 60
     }

@@ -1,4 +1,4 @@
-package com.example.idddchatroom.core.infra.db
+package com.example.idddchatroom.core.infra.userAccount.db
 
 import com.example.idddchatroom.core.domain.userAccount.*
 import com.example.idddchatroom.dddFoundation.FindResult

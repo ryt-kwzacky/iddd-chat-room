@@ -17,14 +17,13 @@ class Room(override val id: RoomId,
             roomId: RoomId,
             roomName: RoomName,
             roomLevel: RoomLevel,
-            ownerId: RoomOwner,
-            createdDateTime: CreatedDateTime
+            ownerId: RoomOwner
         ) = Room(
             id = roomId,
             name = roomName,
             level = roomLevel,
             ownerId = ownerId,
-            createdDateTime = createdDateTime
+            createdDateTime = CreatedDateTime.genCreatedDateTime()
         )
     }
 

@@ -8,7 +8,7 @@ import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
 import com.example.idddchatroom.core.infra.userAccount.db.InMemoryUserAccountRepository
 import com.example.idddchatroom.testSupportTool.RoomFactory
 import com.example.idddchatroom.testSupportTool.UserAccountFactory
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,10 +53,10 @@ class UpdateRoomLevelCommandHandlerTests {
         /**
          * Before
          */
-        Assertions.assertThat(roomRepository.count()).isEqualTo(1)
-        Assertions.assertThat(roomRepository.findById(roomId).exists()).isTrue()
-        Assertions.assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level).isEqualTo(roomLevel)
-        Assertions.assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level.value).isEqualTo(roomLevel.value)
+        assertThat(roomRepository.count()).isEqualTo(1)
+        assertThat(roomRepository.findById(roomId).exists()).isTrue()
+        assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level).isEqualTo(roomLevel)
+        assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level.value).isEqualTo(roomLevel.value)
 
         /**
          * Perform commandHandler
@@ -66,8 +66,8 @@ class UpdateRoomLevelCommandHandlerTests {
         /**
          * After
          */
-        Assertions.assertThat(roomRepository.count()).isEqualTo(1)
-        Assertions.assertThat(roomRepository.findById(roomId).exists()).isTrue()
-        Assertions.assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level.value).isEqualTo(newRoomLevel.value)
+        assertThat(roomRepository.count()).isEqualTo(1)
+        assertThat(roomRepository.findById(roomId).exists()).isTrue()
+        assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level.value).isEqualTo(newRoomLevel.value)
     }
 }

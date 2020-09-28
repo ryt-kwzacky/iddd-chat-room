@@ -13,6 +13,8 @@ object TestDataGenerator {
 
     fun genRandomNumber(range: IntRange): Number = range.random()
 
+    fun genRandomInt(range: IntRange): Int = genRandomNumber(range).toInt()
+
     fun genRandomLengthString(range: IntRange): String = genRandomString(genRandomNumber(range).toInt())
 
     fun genRandomFileName(): String = UUID.randomUUID().toString().replace("-", "")

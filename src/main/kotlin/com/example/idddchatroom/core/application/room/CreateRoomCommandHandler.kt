@@ -1,7 +1,9 @@
 package com.example.idddchatroom.core.application.room
 
 import com.example.idddchatroom.core.application.room.command.CreateRoomCommand
-import com.example.idddchatroom.core.domain.room.*
+import com.example.idddchatroom.core.domain.room.Room
+import com.example.idddchatroom.core.domain.room.RoomId
+import com.example.idddchatroom.core.domain.room.RoomRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

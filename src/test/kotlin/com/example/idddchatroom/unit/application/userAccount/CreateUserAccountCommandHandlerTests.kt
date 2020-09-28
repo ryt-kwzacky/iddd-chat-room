@@ -1,8 +1,8 @@
-package com.example.idddchatroom.unit.application
+package com.example.idddchatroom.unit.application.userAccount
 
 import com.example.idddchatroom.core.application.userAccount.CreateUserAccountCommandHandler
 import com.example.idddchatroom.core.application.userAccount.command.CreateUserAccountCommand
-import com.example.idddchatroom.core.infra.db.InMemoryUserAccountRepository
+import com.example.idddchatroom.core.infra.userAccount.db.InMemoryUserAccountRepository
 import com.example.idddchatroom.testSupportTool.UserAccountFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

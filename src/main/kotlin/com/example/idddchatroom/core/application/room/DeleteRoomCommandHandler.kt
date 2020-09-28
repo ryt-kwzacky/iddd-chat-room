@@ -14,7 +14,6 @@ class DeleteRoomCommandHandler(
     fun handle(
         command: DeleteRoomCommand
     ) {
-        // TODO: Specificationクラス使ってTellに変える？
         if (messageRepository.findAllByRoomId(command.roomId).exists()) {
             // TODO: 削除対象ルームにメッセージが一件以上ある時の処理
             return

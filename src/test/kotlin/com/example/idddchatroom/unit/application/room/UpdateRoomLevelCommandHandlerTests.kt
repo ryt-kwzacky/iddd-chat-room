@@ -34,7 +34,7 @@ class UpdateRoomLevelCommandHandlerTests {
     private val roomId = room.id
     private val roomLevel = room.toDTO().level
     private val newRoomLevel = RoomLevel(room.toDTO().level.value - 1).toDTO()
-  
+
     @Before
     fun setUp() {
         roomRepository.reset()

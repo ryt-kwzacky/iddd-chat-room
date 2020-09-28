@@ -2,6 +2,7 @@ package com.example.idddchatroom.unit.application.room
 
 import com.example.idddchatroom.core.application.room.UpdateRoomLevelCommandHandler
 import com.example.idddchatroom.core.application.room.command.UpdateRoomLevelCommand
+import com.example.idddchatroom.core.domain.room.RoomLevel
 import com.example.idddchatroom.core.domain.room.RoomOwner
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
@@ -32,9 +33,9 @@ class UpdateRoomLevelCommandHandlerTests {
     )
     private val roomId = room.id
     private val roomLevel = room.toDTO().level
-    private val newRoomLevel = RoomFactory.genRoomLevel().toDTO()
+    private val newRoomLevel = RoomLevel(room.toDTO().level.value - 1).toDTO()
 
-        @Before
+    @Before
     fun setUp() {
         roomRepository.reset()
         userAccountRepository.reset()
@@ -44,7 +45,7 @@ class UpdateRoomLevelCommandHandlerTests {
     }
 
     @Test
-    fun `handle - delete Room that has no message`() {
+    fun `handle - lower RoomLevel`() {
         val command = UpdateRoomLevelCommand.create(
             roomId = roomId.value,
             newRoomLevel = newRoomLevel.value
@@ -68,6 +69,7 @@ class UpdateRoomLevelCommandHandlerTests {
          */
         assertThat(roomRepository.count()).isEqualTo(1)
         assertThat(roomRepository.findById(roomId).exists()).isTrue()
+        assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level).isEqualTo(newRoomLevel)
         assertThat(roomRepository.findById(roomId).getOrFail().toDTO().level.value).isEqualTo(newRoomLevel.value)
     }
 }

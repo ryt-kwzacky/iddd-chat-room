@@ -15,7 +15,7 @@ class CreateMessageCommandHandler(
         command: CreateMessageCommand
     ): MessageId {
         val newMessage = Message.create(
-            id = command.id,
+            id = messageRepository.nextIdentity(),
             text = command.text,
             image = command.image,
             roomId = command.roomId,

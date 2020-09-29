@@ -38,7 +38,7 @@ class InMemoryMessageRepository : MessageRepository {
             Message(
                 id = dto.id,
                 text = MessageText(dto.text.value),
-                image = AttachedImage(dto.image.path),
+                image = dto.image?.let { AttachedImage(it.path) },
                 roomId = dto.roomId,
                 sender = MessageSender(dto.sender.value),
                 sentDateTime = SentDateTime(dto.sentDateTime.value),
@@ -53,7 +53,7 @@ class InMemoryMessageRepository : MessageRepository {
             Message(
                 id = dto.id,
                 text = MessageText(dto.text.value),
-                image = AttachedImage(dto.image.path),
+                image = dto.image?.let { AttachedImage(it.path) },
                 roomId = dto.roomId,
                 sender = MessageSender(dto.sender.value),
                 sentDateTime = SentDateTime(dto.sentDateTime.value),

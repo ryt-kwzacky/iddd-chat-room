@@ -30,7 +30,7 @@ class Message(
             image = image,
             roomId = roomId,
             sender = sender,
-            sentDateTime = SentDateTime.genCreatedDateTime(),
+            sentDateTime = SentDateTime.getSentDateTime(),
             targetMessageId = targetMessageId
         )
     }

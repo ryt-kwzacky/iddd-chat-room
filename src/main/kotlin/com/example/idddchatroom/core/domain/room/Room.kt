@@ -23,7 +23,7 @@ class Room(override val id: RoomId,
             name = roomName,
             level = roomLevel,
             ownerId = ownerId,
-            createdDateTime = CreatedDateTime.genCreatedDateTime()
+            createdDateTime = CreatedDateTime.getCreatedDateTime()
         )
     }
 

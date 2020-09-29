@@ -79,3 +79,4 @@ class DeleteMessageCommandHandlerTests {
         assertThat(messageRepository.findById(targetMessageId).exists()).isFalse()
     }
 }
+

@@ -15,7 +15,7 @@ class CreateReplyMessageCommandHandler(
     fun handle(
         command: CreateReplyMessageCommand
     ): MessageId {
-        // リプライメッセージにはリプライできないようにしている
+        // リプライメッセージにはリプライしようとするとエラー
         // TODO: 仕様クラスなどに切り分ける
         val targetMessage = messageRepository.findById(command.targetMessageId).getOrFail()
         if (targetMessage.isReplyMessage()) {

@@ -1,7 +1,7 @@
 package com.example.idddchatroom.unit.application.message
 
-import com.example.idddchatroom.core.application.message.CreateMessageCommandHandler
-import com.example.idddchatroom.core.application.message.command.CreateMessageCommand
+import com.example.idddchatroom.core.application.message.CreateReplyMessageCommandHandler
+import com.example.idddchatroom.core.application.message.command.CreateReplyMessageCommand
 import com.example.idddchatroom.core.domain.message.MessageSender
 import com.example.idddchatroom.core.domain.room.RoomOwner
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
@@ -19,11 +19,11 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class CreateMessageCommandHandlerTests {
+class CreateReplyMessageCommandHandlerTests {
     private val userAccountRepository = InMemoryUserAccountRepository()
     private val roomRepository = InMemoryRoomRepository()
     private val messageRepository = InMemoryMessageRepository()
-    private val commandHandler = CreateMessageCommandHandler(
+    private val commandHandler = CreateReplyMessageCommandHandler(
         messageRepository
     )
 
@@ -33,9 +33,16 @@ class CreateMessageCommandHandlerTests {
         ownerId = RoomOwner(universalUserId)
     )
     private val roomId = room.id
-    private val text = MessageFactory.genText()
-    private val image = MessageFactory.genImage()
-    private val sender = MessageSender(universalUserId)
+    private val message = MessageFactory.genMessage(
+        roomId = roomId,
+        sender = MessageSender(universalUserId),
+        targetMessageId = null
+    )
+
+    private val targetMessageId = message.id
+    private val replyMessageSender = MessageSender(universalUserId)
+    private val replyMessageText = MessageFactory.genText()
+    private val replyMessageImage = MessageFactory.genImage()
 
     @Before
     fun setUp() {
@@ -44,15 +51,17 @@ class CreateMessageCommandHandlerTests {
         roomRepository.reset()
         roomRepository.store(room)
         messageRepository.reset()
+        messageRepository.store(message)
     }
 
     @Test
-    fun `handle - create message`() {
-        val command = CreateMessageCommand.create(
-            text = text.toDTO().value,
-            image = image.toDTO().path,
+    fun `handle - create reply message`() {
+        val command = CreateReplyMessageCommand.create(
+            text = replyMessageText.toDTO().value,
+            image = replyMessageImage.toDTO().path,
             roomId = roomId.value,
-            sender = sender.toDTO().value.value
+            sender = replyMessageSender.toDTO().value.value,
+            targetMessageId = targetMessageId.value
         )
 
         /**
@@ -60,21 +69,21 @@ class CreateMessageCommandHandlerTests {
          */
         assertThat(userAccountRepository.count()).isEqualTo(1)
         assertThat(roomRepository.count()).isEqualTo(1)
-        assertThat(messageRepository.count()).isEqualTo(0)
+        assertThat(messageRepository.count()).isEqualTo(1)
 
         /**
          * Perform commandHandler
          */
-        val createdMessageId = commandHandler.handle(command)
+        val createdReplyMessageId = commandHandler.handle(command)
 
         /**
          * After
          */
         assertThat(userAccountRepository.count()).isEqualTo(1)
         assertThat(roomRepository.count()).isEqualTo(1)
-        assertThat(messageRepository.count()).isEqualTo(1)
-        assertThat(messageRepository.findById(createdMessageId).exists()).isTrue()
-        assertThat(messageRepository.findById(createdMessageId).getOrFail().toDTO().targetMessageId).isEqualTo(null)
-        assertThat(messageRepository.findById(createdMessageId).getOrFail().isReplyMessage()).isFalse()
+        assertThat(messageRepository.count()).isEqualTo(2)
+        assertThat(messageRepository.findById(createdReplyMessageId).exists()).isTrue()
+        assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().toDTO().targetMessageId?.value).isEqualTo(targetMessageId.value)
+        assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().isReplyMessage()).isTrue()
     }
 }

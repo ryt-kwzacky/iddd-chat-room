@@ -48,7 +48,7 @@ class Message(
         return copy(text = newText)
     }
 
-    fun isReplyMessage(): Boolean = this.targetMessageId == null
+    fun isReplyMessage(): Boolean = this.targetMessageId !== null
 
     private fun copy(
         text: MessageText = this.text,

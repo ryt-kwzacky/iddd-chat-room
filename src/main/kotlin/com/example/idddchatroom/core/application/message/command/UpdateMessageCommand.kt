@@ -6,7 +6,7 @@ import com.example.idddchatroom.core.domain.message.MessageText
 import com.example.idddchatroom.core.domain.message.SentDateTime
 import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 
-data class EditMessageCommand private constructor(
+data class UpdateMessageCommand private constructor(
     val messageId: MessageId,
     val newText: MessageText,
     val sender: MessageSender,
@@ -17,7 +17,7 @@ data class EditMessageCommand private constructor(
             messageId: String,
             newText: String,
             sender: String
-        ) = EditMessageCommand(
+        ) = UpdateMessageCommand(
             messageId = MessageId(messageId),
             newText = MessageText(newText),
             sender = MessageSender(UniversalUserId(sender)),

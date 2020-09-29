@@ -55,7 +55,41 @@ class CreateReplyMessageCommandHandlerTests {
     }
 
     @Test
-    fun `handle - create reply message`() {
+    fun `handle - create reply message with no AttachedImage`() {
+        val command = CreateReplyMessageCommand.create(
+            text = replyMessageText.toDTO().value,
+            image = null,
+            roomId = roomId.value,
+            sender = replyMessageSender.toDTO().value.value,
+            targetMessageId = targetMessageId.value
+        )
+
+        /**
+         * Before
+         */
+        assertThat(userAccountRepository.count()).isEqualTo(1)
+        assertThat(roomRepository.count()).isEqualTo(1)
+        assertThat(messageRepository.count()).isEqualTo(1)
+
+        /**
+         * Perform commandHandler
+         */
+        val createdReplyMessageId = commandHandler.handle(command)
+
+        /**
+         * After
+         */
+        assertThat(userAccountRepository.count()).isEqualTo(1)
+        assertThat(roomRepository.count()).isEqualTo(1)
+        assertThat(messageRepository.count()).isEqualTo(2)
+        assertThat(messageRepository.findById(createdReplyMessageId).exists()).isTrue()
+        assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().toDTO().targetMessageId?.value).isEqualTo(targetMessageId.value)
+        assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().toDTO().image).isNull()
+        assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().isReplyMessage()).isTrue()
+    }
+
+    @Test
+    fun `handle - create reply message with AttachedImage`() {
         val command = CreateReplyMessageCommand.create(
             text = replyMessageText.toDTO().value,
             image = replyMessageImage.toDTO().path,
@@ -84,6 +118,7 @@ class CreateReplyMessageCommandHandlerTests {
         assertThat(messageRepository.count()).isEqualTo(2)
         assertThat(messageRepository.findById(createdReplyMessageId).exists()).isTrue()
         assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().toDTO().targetMessageId?.value).isEqualTo(targetMessageId.value)
+        assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().toDTO().image).isNotEqualTo(null)
         assertThat(messageRepository.findById(createdReplyMessageId).getOrFail().isReplyMessage()).isTrue()
     }
 }

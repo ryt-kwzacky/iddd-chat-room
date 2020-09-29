@@ -48,6 +48,8 @@ class Message(
         return copy(text = newText)
     }
 
+    fun isReplyMessage(): Boolean = this.targetMessageId == null
+
     private fun copy(
         text: MessageText = this.text,
         image: AttachedImage = this.image,

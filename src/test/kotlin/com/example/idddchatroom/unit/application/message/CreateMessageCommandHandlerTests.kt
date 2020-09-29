@@ -37,9 +37,8 @@ class CreateMessageCommandHandlerTests {
     private val text = MessageFactory.genText()
     private val image = MessageFactory.genImage()
     private val sender = MessageSender(universalUserId)
-    private val targetMessageId: Nothing? = null
 
-        @Before
+    @Before
     fun setUp() {
         userAccountRepository.reset()
         userAccountRepository.store(userAccount)
@@ -54,8 +53,7 @@ class CreateMessageCommandHandlerTests {
             text = text.toDTO().value,
             image = image.toDTO().path,
             roomId = roomId.value,
-            sender = sender.toDTO().value.value,
-            targetMessageId = targetMessageId
+            sender = sender.toDTO().value.value
         )
 
         /**
@@ -77,7 +75,37 @@ class CreateMessageCommandHandlerTests {
         assertThat(roomRepository.count()).isEqualTo(1)
         assertThat(messageRepository.count()).isEqualTo(1)
         assertThat(messageRepository.findById(createdMessage).exists()).isTrue()
+        assertThat(messageRepository.findById(createdMessage).getOrFail().toDTO().targetMessageId).isEqualTo(null)
     }
 
-    fun `handle - create reply message`() {}
+    private val firstMessage = MessageFactory.genMessage(
+        roomId = roomId,
+        sender = sender,
+        targetMessageId = null
+    )
+    private val firstMessageId = firstMessage.id
+
+//    @Test
+//    fun `handle - create reply message`() {
+//        val command = CreateMessageCommand.create(
+//            text = text.toDTO().value,
+//            image = image.toDTO().path,
+//            roomId = roomId.value,
+//            sender = sender.toDTO().value.value,
+//        )
+//
+//        messageRepository.store(firstMessage)
+//
+//        /**
+//         * Before
+//         */
+//        assertThat(userAccountRepository.count()).isEqualTo(1)
+//        assertThat(messageRepository.count()).isEqualTo(1)
+//
+//        /**
+//         * Perform commandHandler
+//         */
+//        val createdReplyMessage = commandHandler.handle(command)
+//
+//    }
 }

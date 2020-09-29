@@ -32,6 +32,11 @@ class InMemoryMessageRepository : MessageRepository {
             repository.findAllBy { it.toDTO().roomId == roomId }
         )
 
+    override fun findAllByTargetMessageId(targetMessageId: MessageId): FindAllResult<Message>  =
+        FindAllResult(
+            repository.findAllBy { it.toDTO().targetMessageId == targetMessageId }
+        )
+
     override fun store(message: Message) {
         val dto = message.toDTO()
         repository.store(

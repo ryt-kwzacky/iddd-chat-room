@@ -6,7 +6,7 @@ import java.time.ZonedDateTime
 
 class CreatedDateTime(private val value: ZonedDateTime): ValueObject<CreatedDateTime.DTO> {
     companion object {
-        fun genCreatedDateTime() = CreatedDateTime(ZonedDateTime.now())
+        fun getCreatedDateTime() = CreatedDateTime(ZonedDateTime.now())
 
         // 60分（60 * 60秒）
         const val DELETABLE_TIME_LIMIT = 60 * 60

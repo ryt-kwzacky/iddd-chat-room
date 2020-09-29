@@ -16,7 +16,7 @@ class CreateReplyMessageCommandHandler(
         command: CreateReplyMessageCommand
     ): MessageId {
         // TODO: 仕様クラスなどに切り分ける
-        // リプライメッセージにはリプライしようとすると例外を投げる処理
+        // リプライメッセージにリプライしようとすると例外を投げる処理
         val targetMessage = messageRepository.findById(command.targetMessageId).getOrFail()
         if (targetMessage.isReplyMessage()) {
             throw IllegalStateException()

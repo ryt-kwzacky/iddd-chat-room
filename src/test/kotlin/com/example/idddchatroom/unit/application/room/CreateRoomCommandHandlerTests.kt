@@ -4,6 +4,7 @@ import com.example.idddchatroom.core.application.room.CreateRoomCommandHandler
 import com.example.idddchatroom.core.application.room.command.CreateRoomCommand
 import com.example.idddchatroom.core.domain.room.RoomLevel
 import com.example.idddchatroom.core.domain.room.RoomName
+import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
 import com.example.idddchatroom.core.infra.userAccount.db.InMemoryUserAccountRepository
 import com.example.idddchatroom.testSupportTool.TestDataGenerator
@@ -20,8 +21,10 @@ import org.springframework.test.context.junit4.SpringRunner
 class CreateRoomCommandHandlerTests {
     private val roomRepository = InMemoryRoomRepository()
     private val userAccountRepository = InMemoryUserAccountRepository()
+    private val messageRepository = InMemoryMessageRepository()
     private val commandHandler = CreateRoomCommandHandler(
-        roomRepository
+        roomRepository,
+        messageRepository
     )
 
     private val userAccount = UserAccountFactory.genUserAccount()

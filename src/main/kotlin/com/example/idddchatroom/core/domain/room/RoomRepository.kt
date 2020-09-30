@@ -7,7 +7,9 @@ interface RoomRepository {
 
     fun findById(id: RoomId): FindResult<Room>
 
-    fun store(userAccount: Room)
+    fun findAllByRoomOwner(roomOwner: RoomOwner): FindResult<Room>
 
-    fun remove(userAccount: Room)
+    fun store(room: Room)
+
+    fun remove(room: Room)
 }

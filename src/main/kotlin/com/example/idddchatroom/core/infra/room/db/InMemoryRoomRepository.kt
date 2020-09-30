@@ -21,6 +21,11 @@ class InMemoryRoomRepository : RoomRepository {
             repository.findBy { it.toDTO().id == id }
         )
 
+    override fun findAllByRoomOwner(roomOwner: RoomOwner): FindResult<Room> =
+        FindResult(
+            repository.findBy { it.toDTO().ownerId.value == roomOwner.toDTO().value }
+        )
+
     override fun store(room: Room) {
         val dto = room.toDTO()
         repository.store(

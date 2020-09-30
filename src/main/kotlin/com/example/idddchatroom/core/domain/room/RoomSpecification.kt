@@ -15,7 +15,10 @@ class RoomSpecification(
         universalUserId: UniversalUserId,
         roomId: RoomId
     ): Boolean {
-        return if (universalUserId == roomRepository.findById(roomId).getOrFail().toDTO().ownerId.value) {
+        val roomOwner = RoomOwner(roomRepository.findById(roomId).getOrFail().toDTO().ownerId.value)
+        val userAttempting = RoomOwner(universalUserId)
+
+        return if (userAttempting.isOwner(roomOwner)) {
             // ルームの作成者の場合
             !messageRepository.findAllByRoomId(roomId).exists()
         } else {

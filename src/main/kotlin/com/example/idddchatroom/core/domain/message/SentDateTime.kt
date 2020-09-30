@@ -13,17 +13,17 @@ class SentDateTime(private val value: ZonedDateTime) : ValueObject<SentDateTime.
         fun getSentDateTime() = SentDateTime(ZonedDateTime.now())
 
         // 15分（15 * 60秒）
-        const val EDITABLE_TIME_LIMIT = 15 * 60
+        const val MESSAGE_EDITABLE_TIME_LIMIT = 15 * 60
 
         // 60分（60 * 60秒）
         const val ROOM_DELETABLE_TIME_LIMIT = 60 * 60
     }
 
     fun isWithinEditableTimeFrom(sentDateTime: SentDateTime): Boolean =
-        Duration.between(sentDateTime.value, this.value).toSeconds() < EDITABLE_TIME_LIMIT
+        Duration.between(sentDateTime.value, this.value).toSeconds() < MESSAGE_EDITABLE_TIME_LIMIT
 
     fun hasPassedEnoughSince(sentDateTime: SentDateTime): Boolean =
-        Duration.between(sentDateTime.value, this.value).toSeconds() > SentDateTime.ROOM_DELETABLE_TIME_LIMIT
+        Duration.between(sentDateTime.value, this.value).toSeconds() > ROOM_DELETABLE_TIME_LIMIT
 
     override fun toDTO(): DTO = DTO(value = value)
 

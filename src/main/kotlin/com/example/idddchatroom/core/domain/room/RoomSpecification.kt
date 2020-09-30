@@ -17,7 +17,6 @@ class RoomSpecification(
     ): Boolean {
         return if (universalUserId == roomRepository.findById(roomId).getOrFail().toDTO().ownerId.value) {
             // ルームの作成者の場合
-            // ルームに「メッセージ」が１件もない場合削除可能
             !messageRepository.findAllByRoomId(roomId).exists()
         } else {
             // ルームの作成者でない場合

@@ -6,7 +6,6 @@ import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-
 //@Component
 class RoomSpecification(
     @Autowired private val roomRepository: RoomRepository,

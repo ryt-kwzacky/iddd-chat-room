@@ -22,7 +22,7 @@ class SentDateTime(private val value: ZonedDateTime) : ValueObject<SentDateTime.
     fun isWithinEditableTimeFrom(sentDateTime: SentDateTime): Boolean =
         Duration.between(sentDateTime.value, this.value).toSeconds() < MESSAGE_EDITABLE_TIME_LIMIT
 
-    fun hasPassedEnoughSince(sentDateTime: SentDateTime): Boolean =
+    fun hasPassedEnoughToDeleteRoomSince(sentDateTime: SentDateTime): Boolean =
         Duration.between(sentDateTime.value, this.value).toSeconds() > ROOM_DELETABLE_TIME_LIMIT
 
     override fun toDTO(): DTO = DTO(value = value)

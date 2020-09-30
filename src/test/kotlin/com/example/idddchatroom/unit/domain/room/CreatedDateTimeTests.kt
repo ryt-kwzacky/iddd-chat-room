@@ -27,13 +27,13 @@ class CreatedDateTimeTests {
         ))
 
     @Test
-    fun `domain - hasPassedEnoughSince`() {
+    fun `domain - hasPassedEnoughToDeleteRoomSince`() {
         // 1. Check duration differences
         assertThat(Duration.between(twoHourBeforeDateTime.toDTO().value, mainDateTime.toDTO().value).toSeconds()).isEqualTo(120 * 60)
         assertThat(Duration.between(halfHourBeforeDateTime.toDTO().value, mainDateTime.toDTO().value).toSeconds()).isEqualTo(30 * 60)
 
         // 2. Check the method
-        assertThat(mainDateTime.hasPassedEnoughSince(twoHourBeforeDateTime)).isTrue()
-        assertThat(mainDateTime.hasPassedEnoughSince(halfHourBeforeDateTime)).isFalse()
+        assertThat(mainDateTime.hasPassedEnoughToDeleteRoomSince(twoHourBeforeDateTime)).isTrue()
+        assertThat(mainDateTime.hasPassedEnoughToDeleteRoomSince(halfHourBeforeDateTime)).isFalse()
     }
 }

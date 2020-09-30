@@ -3,6 +3,7 @@ package com.example.idddchatroom.unit.application.room
 import com.example.idddchatroom.core.application.room.DeleteRoomCommandHandler
 import com.example.idddchatroom.core.application.room.command.DeleteRoomCommand
 import com.example.idddchatroom.core.domain.room.RoomOwner
+import com.example.idddchatroom.core.domain.room.RoomSpecification
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
 import com.example.idddchatroom.core.infra.userAccount.db.InMemoryUserAccountRepository
@@ -21,9 +22,13 @@ class DeleteRoomCommandHandlerTests {
     private val roomRepository = InMemoryRoomRepository()
     private val userAccountRepository = InMemoryUserAccountRepository()
     private val messageRepository = InMemoryMessageRepository()
-    private val commandHandler = DeleteRoomCommandHandler(
+    private val roomSpecification = RoomSpecification(
         roomRepository = roomRepository,
         messageRepository = messageRepository
+    )
+    private val commandHandler = DeleteRoomCommandHandler(
+        roomRepository = roomRepository,
+        specification = roomSpecification
     )
 
     private val userAccount = UserAccountFactory.genUserAccount()
@@ -45,6 +50,7 @@ class DeleteRoomCommandHandlerTests {
     @Test
     fun `handle - delete Room that has no message`() {
         val command = DeleteRoomCommand.create(
+            universalUserId = universalUserId.value,
             roomId = roomId.value
         )
 

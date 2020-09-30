@@ -4,6 +4,8 @@ import com.example.idddchatroom.core.domain.message.MessageRepository
 import com.example.idddchatroom.core.domain.message.SentDateTime
 import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
+
 
 //@Component
 class RoomSpecification(

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 //@Service
 class DeleteRoomCommandHandler(
     @Autowired private val roomRepository: RoomRepository,
-    @Autowired private val messageRepository: MessageRepository,
     @Autowired private val specification: RoomSpecification
 ) {
     fun handle(

@@ -38,7 +38,7 @@ class DeleteRoomCommandHandlerTests {
     )
     private val roomId = room.id
 
-    @Before
+        @Before
     fun setUp() {
         roomRepository.reset()
         userAccountRepository.reset()
@@ -48,7 +48,7 @@ class DeleteRoomCommandHandlerTests {
     }
 
     @Test
-    fun `handle - delete Room that has no message`() {
+    fun `handle - delete Room that has no message by Owner`() {
         val command = DeleteRoomCommand.create(
             universalUserId = universalUserId.value,
             roomId = roomId.value
@@ -73,7 +73,16 @@ class DeleteRoomCommandHandlerTests {
     }
 
     @Test
-    fun `handle - delete Room that has message`() {
+    fun `handle - delete Room that has message by Owner`() {
+        // TODO: Impl after message aggregate
+    }
+
+
+
+    private val notOwner = RoomOwner(UserAccountFactory.genUniversalUserId())
+
+    @Test
+    fun `handle - delete Room that has no message not by Owner`() {
         // TODO: Impl after message aggregate
     }
 }

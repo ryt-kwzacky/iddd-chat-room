@@ -21,16 +21,22 @@ class RoomSpecification(
             !messageRepository.findAllByRoomId(roomId).exists()
         } else {
             // ルームの作成者でない場合
-            val roomCurrentDateTime = CreatedDateTime.getCreatedDateTime()
-            val roomCreatedDateTime = CreatedDateTime(roomRepository.findById(roomId).getOrFail().toDTO().createdDateTime.value)
-
-            val messageCurrentDateTime = SentDateTime.getSentDateTime()
-            val messageSentDateTime = SentDateTime(messageRepository.findSentLastByRoomId(roomId).getOrFail().toDTO().sentDateTime.value)
-
-            // 「ルーム」が作成されてから規定時間以上経過しており
-            roomCurrentDateTime.hasPassedEnoughToDeleteRoomSince(roomCreatedDateTime) &&
-                // 最後に送信された「ルーム」内の「メッセージ」が規定時間（1時間）以上前のものの場合削除可能
-                messageCurrentDateTime.hasPassedEnoughToDeleteRoomSince(messageSentDateTime)
+            this.hasPassedEnoughToDeleteRoomSinceRoomCreated(roomId) &&
+                this.hasPassedEnoughToDeleteRoomSinceLastMessageSent(roomId)
         }
+    }
+
+    private fun hasPassedEnoughToDeleteRoomSinceRoomCreated(roomId: RoomId): Boolean {
+        val roomCurrentDateTime = CreatedDateTime.getCreatedDateTime()
+        val roomCreatedDateTime =
+            CreatedDateTime(roomRepository.findById(roomId).getOrFail().toDTO().createdDateTime.value)
+        return roomCurrentDateTime.hasPassedEnoughToDeleteRoomSince(roomCreatedDateTime)
+    }
+
+    private fun hasPassedEnoughToDeleteRoomSinceLastMessageSent(roomId: RoomId): Boolean {
+        val messageCurrentDateTime = SentDateTime.getSentDateTime()
+        val messageSentDateTime =
+            SentDateTime(messageRepository.findSentLastByRoomId(roomId).getOrFail().toDTO().sentDateTime.value)
+        return messageCurrentDateTime.hasPassedEnoughToDeleteRoomSince(messageSentDateTime)
     }
 }

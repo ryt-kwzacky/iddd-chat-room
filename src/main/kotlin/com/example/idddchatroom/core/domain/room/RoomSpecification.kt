@@ -19,10 +19,8 @@ class RoomSpecification(
         val userAttempting = RoomOwner(universalUserId)
 
         return if (userAttempting.isOwner(roomOwner)) {
-            // ルームの作成者の場合
             !messageRepository.findAllByRoomId(roomId).exists()
         } else {
-            // ルームの作成者でない場合
             this.hasPassedEnoughToDeleteRoomSinceRoomCreated(roomId) &&
                 this.hasPassedEnoughToDeleteRoomSinceLastMessageSent(roomId)
         }

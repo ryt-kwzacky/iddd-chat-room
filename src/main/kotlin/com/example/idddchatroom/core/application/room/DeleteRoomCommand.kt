@@ -1,4 +1,4 @@
-package com.example.idddchatroom.core.application.room.command
+package com.example.idddchatroom.core.application.room
 
 import com.example.idddchatroom.core.domain.room.RoomId
 import com.example.idddchatroom.core.domain.userAccount.UniversalUserId

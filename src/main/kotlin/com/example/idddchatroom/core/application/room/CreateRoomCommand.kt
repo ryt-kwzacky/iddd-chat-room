@@ -1,4 +1,4 @@
-package com.example.idddchatroom.core.application.room.command
+package com.example.idddchatroom.core.application.room
 
 import com.example.idddchatroom.core.domain.room.RoomLevel
 import com.example.idddchatroom.core.domain.room.RoomName

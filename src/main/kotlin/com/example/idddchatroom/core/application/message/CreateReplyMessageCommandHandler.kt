@@ -1,11 +1,9 @@
 package com.example.idddchatroom.core.application.message
 
-import com.example.idddchatroom.core.application.message.command.CreateReplyMessageCommand
 import com.example.idddchatroom.core.domain.message.Message
 import com.example.idddchatroom.core.domain.message.MessageId
 import com.example.idddchatroom.core.domain.message.MessageRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 import java.lang.IllegalStateException
 
 //@Service

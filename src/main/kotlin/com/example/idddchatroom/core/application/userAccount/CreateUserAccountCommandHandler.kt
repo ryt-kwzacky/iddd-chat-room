@@ -1,9 +1,7 @@
 package com.example.idddchatroom.core.application.userAccount
 
-import com.example.idddchatroom.core.application.userAccount.command.CreateUserAccountCommand
 import com.example.idddchatroom.core.domain.userAccount.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 
 // TODO: delete comment out after Impl JooqRepository
 //@Service

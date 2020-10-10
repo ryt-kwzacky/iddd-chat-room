@@ -20,7 +20,7 @@ class CreateRoomCommandHandler(
         // TODO: ロール与えてAOPで処理するようにする
         // TODO: 複雑なのでspecificationクラスを用意
         // 一つ以上メッセージを送っていることをチェック
-        if (!messageRepository.findAllByUniversalUserId(command.ownerId.toDTO().value).exists()) {
+        if (!messageRepository.findAllByUniversalUserId(command.ownerId).exists()) {
             // 一つ以上ルームを作成していることをチェック
             if (roomRepository.findAllByRoomOwner(command.ownerId).exists()) {
                 throw IllegalStateException()
@@ -29,9 +29,9 @@ class CreateRoomCommandHandler(
 
         val newRoom = Room.create(
             roomId = roomRepository.nextIdentity(),
+            ownerId = command.ownerId,
             roomName = command.roomName,
-            roomLevel = command.roomLevel,
-            ownerId = command.ownerId
+            roomLevel = command.roomLevel
         )
         roomRepository.store(newRoom)
         return newRoom.id

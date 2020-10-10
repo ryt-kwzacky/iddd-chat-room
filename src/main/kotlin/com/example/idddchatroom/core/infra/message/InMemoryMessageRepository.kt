@@ -32,6 +32,12 @@ class InMemoryMessageRepository : MessageRepository {
             repository.findAllBy { it.toDTO().roomId == roomId }
         )
 
+    override fun findSentLastByRoomId(roomId: RoomId): FindResult<Message> =
+        FindResult(
+            repository
+                .findAllBy { it.toDTO().roomId == roomId }
+                .maxBy { it.toDTO().sentDateTime.value })
+
     override fun findAllByTargetMessageId(targetMessageId: MessageId): FindAllResult<Message>  =
         FindAllResult(
             repository.findAllBy { it.toDTO().targetMessageId == targetMessageId }

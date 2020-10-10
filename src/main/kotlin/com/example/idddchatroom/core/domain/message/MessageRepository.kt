@@ -14,6 +14,8 @@ interface MessageRepository {
 
     fun findAllByRoomId(roomId: RoomId): FindAllResult<Message>
 
+    fun findSentLastByRoomId(roomId: RoomId): FindResult<Message>
+
     fun findAllByTargetMessageId(targetMessageId: MessageId): FindAllResult<Message>
 
     fun store(message: Message)

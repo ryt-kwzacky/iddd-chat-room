@@ -1,5 +1,6 @@
 package com.example.idddchatroom.core.domain.room
 
+import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 import com.example.idddchatroom.dddFoundation.Entity
 
 /**
@@ -7,22 +8,22 @@ import com.example.idddchatroom.dddFoundation.Entity
  * ルーム
  */
 class Room(override val id: RoomId,
+           private val ownerId: UniversalUserId,
            private val name: RoomName,
            private val level: RoomLevel,
-           private val ownerId: RoomOwner,
            private val createdDateTime: CreatedDateTime
 ) : Entity<Room.DTO>() {
     companion object {
         fun create(
             roomId: RoomId,
+            ownerId: UniversalUserId,
             roomName: RoomName,
-            roomLevel: RoomLevel,
-            ownerId: RoomOwner
+            roomLevel: RoomLevel
         ) = Room(
             id = roomId,
+            ownerId = ownerId,
             name = roomName,
             level = roomLevel,
-            ownerId = ownerId,
             createdDateTime = CreatedDateTime.getCreatedDateTime()
         )
     }
@@ -32,32 +33,38 @@ class Room(override val id: RoomId,
         return copy(level = newRoomLevel)
     }
 
+    fun meetsCreatedDateTimeRequirementToDelete(): Boolean =
+        createdDateTime.meetsRequirementToDeleteRoom()
+
+    fun isCreatedBy(universalUserId: UniversalUserId): Boolean =
+        this.ownerId == universalUserId
+
     private fun copy(
+        ownerId: UniversalUserId = this.ownerId,
         name: RoomName = this.name,
         level: RoomLevel = this.level,
-        ownerId: RoomOwner = this.ownerId,
         createdDateTime: CreatedDateTime = this.createdDateTime
     ) = Room(
         id = id,
+        ownerId = ownerId,
         name = name,
         level = level,
-        ownerId = ownerId,
         createdDateTime = createdDateTime
     )
 
     override fun toDTO(): DTO = DTO(
         id = id,
+        ownerId = ownerId,
         name = name.toDTO(),
         level = level.toDTO(),
-        ownerId = ownerId.toDTO(),
         createdDateTime = createdDateTime.toDTO()
     )
 
     data class DTO(
         val id: RoomId,
+        val ownerId: UniversalUserId,
         val name: RoomName.DTO,
         val level: RoomLevel.DTO,
-        val ownerId: RoomOwner.DTO,
         val createdDateTime: CreatedDateTime.DTO
     )
 }

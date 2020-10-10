@@ -3,7 +3,6 @@ package com.example.idddchatroom.unit.application.message
 import com.example.idddchatroom.core.application.message.CreateReplyMessageCommandHandler
 import com.example.idddchatroom.core.application.message.command.CreateReplyMessageCommand
 import com.example.idddchatroom.core.domain.message.MessageSender
-import com.example.idddchatroom.core.domain.room.RoomOwner
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
 import com.example.idddchatroom.core.infra.userAccount.db.InMemoryUserAccountRepository
@@ -30,7 +29,8 @@ class CreateReplyMessageCommandHandlerTests {
     private val userAccount = UserAccountFactory.genUserAccount()
     private val universalUserId = userAccount.id
     private val room = RoomFactory.genRoom(
-        ownerId = RoomOwner(universalUserId)
+        ownerId = universalUserId,
+        createdDateTime = RoomFactory.genTwoHoursBeforeCreatedDateTime()
     )
     private val roomId = room.id
     private val message = MessageFactory.genMessage(

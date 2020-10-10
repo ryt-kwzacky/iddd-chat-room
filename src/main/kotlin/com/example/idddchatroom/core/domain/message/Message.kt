@@ -37,17 +37,20 @@ class Message(
 
     fun edit(
         newText: MessageText,
-        sender: MessageSender,
-        currentDateTime: SentDateTime
+        sender: MessageSender
     ): Message {
         require(
             // TODO: 権限管理をAOPでやる
-            sender.isMatchedWith(this.sender) && currentDateTime.isWithinEditableTimeFrom(this.sentDateTime)
+            // 認証認可周りはシンプルにする。複雑になりやすい傾向があるから
+            sender.isMatchedWith(this.sender) && sentDateTime.meetsRequirementToEdit()
         )
         return copy(text = newText)
     }
 
     fun isReplyMessage(): Boolean = this.targetMessageId !== null
+
+    fun meetsSentDateTimeRequirementToDeleteRoom(): Boolean =
+        sentDateTime.meetsRequirementToDeleteRoom()
 
     private fun copy(
         text: MessageText = this.text,

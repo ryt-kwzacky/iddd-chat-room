@@ -3,7 +3,6 @@ package com.example.idddchatroom.unit.application.room
 import com.example.idddchatroom.core.application.room.UpdateRoomLevelCommandHandler
 import com.example.idddchatroom.core.application.room.command.UpdateRoomLevelCommand
 import com.example.idddchatroom.core.domain.room.RoomLevel
-import com.example.idddchatroom.core.domain.room.RoomOwner
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
 import com.example.idddchatroom.core.infra.userAccount.db.InMemoryUserAccountRepository
@@ -29,7 +28,8 @@ class UpdateRoomLevelCommandHandlerTests {
     private val userAccount = UserAccountFactory.genUserAccount()
     private val universalUserId = userAccount.id
     private val room = RoomFactory.genRoom(
-        ownerId = RoomOwner(universalUserId)
+        ownerId = universalUserId,
+        createdDateTime = RoomFactory.genTwoHoursBeforeCreatedDateTime()
     )
     private val roomId = room.id
     private val roomLevel = room.toDTO().level

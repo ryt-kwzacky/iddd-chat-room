@@ -15,8 +15,7 @@ class UpdateMessageCommandHandler(
         val targetMessage = messageRepository.findById(command.messageId).getOrFail()
         val editedMessage = targetMessage.edit(
             newText = command.newText,
-            sender = command.sender,
-            currentDateTime = command.currentDateTime
+            sender = command.sender
         )
         messageRepository.store(editedMessage)
     }

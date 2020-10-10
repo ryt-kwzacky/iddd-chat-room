@@ -3,21 +3,24 @@ package com.example.idddchatroom.core.application.room
 import com.example.idddchatroom.core.application.room.command.DeleteRoomCommand
 import com.example.idddchatroom.core.domain.message.MessageRepository
 import com.example.idddchatroom.core.domain.room.RoomRepository
+import com.example.idddchatroom.core.domain.room.RoomSpecification
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 
 //@Service
 class DeleteRoomCommandHandler(
     @Autowired private val roomRepository: RoomRepository,
-    @Autowired private val messageRepository: MessageRepository
+    @Autowired private val specification: RoomSpecification
 ) {
     fun handle(
         command: DeleteRoomCommand
     ) {
-        if (messageRepository.findAllByRoomId(command.roomId).exists()) {
-            // TODO: 削除対象ルームにメッセージが一件以上ある時の処理
-            return
+        if (!specification.isDeletableRoom(
+                universalUserId = command.universalUserId,
+                roomId = command.roomId)
+        ) {
+            throw IllegalStateException()
         }
+
         val targetRoom = roomRepository.findById(command.roomId).getOrFail()
         roomRepository.remove(targetRoom)
     }

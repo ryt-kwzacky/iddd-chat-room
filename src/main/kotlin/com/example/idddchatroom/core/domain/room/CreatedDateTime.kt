@@ -9,13 +9,13 @@ class CreatedDateTime(private val value: ZonedDateTime): ValueObject<CreatedDate
         fun getCreatedDateTime() = CreatedDateTime(ZonedDateTime.now())
 
         // 60分（60 * 60秒）
-        const val DELETABLE_TIME_LIMIT = 60 * 60
+        const val ROOM_DELETABLE_TIME_LIMIT = 60 * 60
     }
 
-    fun hasPassedEnoughSince(createdDateTime: CreatedDateTime): Boolean =
-        Duration.between(createdDateTime.value, this.value).toSeconds() > DELETABLE_TIME_LIMIT
+    fun meetsRequirementToDeleteRoom(): Boolean =
+        Duration.between(this.value, ZonedDateTime.now()).toSeconds() > ROOM_DELETABLE_TIME_LIMIT
 
     override fun toDTO(): DTO = DTO(value = value)
 
-    data class DTO(val value: ZonedDateTime)
+    class DTO(val value: ZonedDateTime) {}
 }

@@ -2,7 +2,6 @@ package com.example.idddchatroom.core.application.room.command
 
 import com.example.idddchatroom.core.domain.room.RoomLevel
 import com.example.idddchatroom.core.domain.room.RoomName
-import com.example.idddchatroom.core.domain.room.RoomOwner
 import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 
 data class CreateRoomCommand private constructor(

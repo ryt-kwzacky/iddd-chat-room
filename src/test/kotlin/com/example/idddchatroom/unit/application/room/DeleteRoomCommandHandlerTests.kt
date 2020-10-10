@@ -2,7 +2,6 @@ package com.example.idddchatroom.unit.application.room
 
 import com.example.idddchatroom.core.application.room.DeleteRoomCommandHandler
 import com.example.idddchatroom.core.application.room.command.DeleteRoomCommand
-import com.example.idddchatroom.core.domain.room.RoomOwner
 import com.example.idddchatroom.core.domain.room.RoomSpecification
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
@@ -38,7 +37,7 @@ class DeleteRoomCommandHandlerTests {
     )
     private val roomId = room.id
 
-        @Before
+    @Before
     fun setUp() {
         roomRepository.reset()
         userAccountRepository.reset()
@@ -78,11 +77,10 @@ class DeleteRoomCommandHandlerTests {
     }
 
 
-
     private val notOwner = RoomOwner(UserAccountFactory.genUniversalUserId())
 
     @Test
-    fun `handle - delete Room that has no message not by Owner`() {
+    fun `handle - delete Room that was created before more than specified time and has message sent before more than specified time not by Owner`() {
         // TODO: Impl after message aggregate
     }
 }

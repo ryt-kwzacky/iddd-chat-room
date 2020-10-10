@@ -15,28 +15,13 @@ class RoomSpecification(
         universalUserId: UniversalUserId,
         roomId: RoomId
     ): Boolean {
-        val roomOwner = RoomOwner(roomRepository.findById(roomId).getOrFail().toDTO().ownerId.value)
-        val userAttempting = RoomOwner(universalUserId)
-
-        return if (userAttempting.isOwner(roomOwner)) {
-            !messageRepository.findAllByRoomId(roomId).exists()
+        val targetRoom = roomRepository.findById(roomId).getOrFail()
+        return if (targetRoom.isCreatedBy(universalUserId)) {
+            return !messageRepository.findAllByRoomId(roomId).exists()
         } else {
-            this.hasPassedEnoughToDeleteRoomSinceRoomCreated(roomId) &&
-                this.hasPassedEnoughToDeleteRoomSinceLastMessageSent(roomId)
+            targetRoom.meetsCreatedDateTimeRequirementToDelete() &&
+                messageRepository.findSentLastByRoomId(roomId).getOrFail()
+                    .meetsSentDateTimeRequirementToDeleteRoom()
         }
-    }
-
-    private fun hasPassedEnoughToDeleteRoomSinceRoomCreated(roomId: RoomId): Boolean {
-        val roomCurrentDateTime = CreatedDateTime.getCreatedDateTime()
-        val roomCreatedDateTime =
-            CreatedDateTime(roomRepository.findById(roomId).getOrFail().toDTO().createdDateTime.value)
-        return roomCurrentDateTime.hasPassedEnoughToDeleteRoomSince(roomCreatedDateTime)
-    }
-
-    private fun hasPassedEnoughToDeleteRoomSinceLastMessageSent(roomId: RoomId): Boolean {
-        val messageCurrentDateTime = SentDateTime.getSentDateTime()
-        val messageSentDateTime =
-            SentDateTime(messageRepository.findSentLastByRoomId(roomId).getOrFail().toDTO().sentDateTime.value)
-        return messageCurrentDateTime.hasPassedEnoughToDeleteRoomSince(messageSentDateTime)
     }
 }

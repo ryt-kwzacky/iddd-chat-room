@@ -22,3 +22,10 @@ class CreateUserAccountCommandHandler(
         return newUserAccount.id
     }
 }
+// 選択した画像はいったんアップロードされる
+// アップロードしたパスを返す
+// ここで登録する
+// ↑のやり方だと画像を切り替えるたびに関係ない画像がいっぱい残る
+
+// サーバーを通さないのが主流
+// S3に直接アップロードする

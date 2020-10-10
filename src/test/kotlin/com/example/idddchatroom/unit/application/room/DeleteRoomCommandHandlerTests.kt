@@ -14,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.time.ZonedDateTime
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -33,7 +34,8 @@ class DeleteRoomCommandHandlerTests {
     private val userAccount = UserAccountFactory.genUserAccount()
     private val universalUserId = userAccount.id
     private val room = RoomFactory.genRoom(
-        ownerId = RoomOwner(universalUserId)
+        ownerId = universalUserId,
+        createdDateTime = RoomFactory.genTwoHoursBeforeCreatedDateTime()
     )
     private val roomId = room.id
 
@@ -77,7 +79,7 @@ class DeleteRoomCommandHandlerTests {
     }
 
 
-    private val notOwner = RoomOwner(UserAccountFactory.genUniversalUserId())
+    private val notOwner = UserAccountFactory.genUniversalUserId()
 
     @Test
     fun `handle - delete Room that was created before more than specified time and has message sent before more than specified time not by Owner`() {

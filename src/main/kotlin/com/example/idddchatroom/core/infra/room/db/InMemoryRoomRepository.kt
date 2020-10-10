@@ -1,6 +1,7 @@
 package com.example.idddchatroom.core.infra.room.db
 
 import com.example.idddchatroom.core.domain.room.*
+import com.example.idddchatroom.core.domain.userAccount.UniversalUserId
 import com.example.idddchatroom.dddFoundation.FindResult
 import com.example.idddchatroom.sharedKernel.InMemoryBaseRepository
 import com.example.idddchatroom.sharedKernel.RandomIdentityFactory
@@ -21,9 +22,9 @@ class InMemoryRoomRepository : RoomRepository {
             repository.findBy { it.toDTO().id == id }
         )
 
-    override fun findAllByRoomOwner(roomOwner: RoomOwner): FindResult<Room> =
+    override fun findAllByRoomOwner(roomOwner: UniversalUserId): FindResult<Room> =
         FindResult(
-            repository.findBy { it.toDTO().ownerId.value == roomOwner.toDTO().value }
+            repository.findBy { it.toDTO().ownerId == roomOwner }
         )
 
     override fun store(room: Room) {
@@ -31,9 +32,9 @@ class InMemoryRoomRepository : RoomRepository {
         repository.store(
             Room(
                 id = dto.id,
+                ownerId = dto.ownerId,
                 name = RoomName(dto.name.value),
                 level = RoomLevel(dto.level.value),
-                ownerId = RoomOwner(dto.ownerId.value),
                 createdDateTime = CreatedDateTime(dto.createdDateTime.value)
             )
         )
@@ -46,7 +47,7 @@ class InMemoryRoomRepository : RoomRepository {
                 id = dto.id,
                 name = RoomName(dto.name.value),
                 level = RoomLevel(dto.level.value),
-                ownerId = RoomOwner(dto.ownerId.value),
+                ownerId = dto.ownerId,
                 createdDateTime = CreatedDateTime(dto.createdDateTime.value)
             )
         )

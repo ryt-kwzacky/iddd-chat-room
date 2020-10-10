@@ -28,7 +28,8 @@ class UpdateRoomLevelCommandHandlerTests {
     private val userAccount = UserAccountFactory.genUserAccount()
     private val universalUserId = userAccount.id
     private val room = RoomFactory.genRoom(
-        ownerId = RoomOwner(universalUserId)
+        ownerId = universalUserId,
+        createdDateTime = RoomFactory.genTwoHoursBeforeCreatedDateTime()
     )
     private val roomId = room.id
     private val roomLevel = room.toDTO().level

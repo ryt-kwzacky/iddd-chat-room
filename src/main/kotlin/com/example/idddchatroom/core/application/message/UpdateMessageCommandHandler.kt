@@ -1,9 +1,7 @@
 package com.example.idddchatroom.core.application.message
 
-import com.example.idddchatroom.core.application.message.command.UpdateMessageCommand
 import com.example.idddchatroom.core.domain.message.MessageRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 
 //@Service
 class UpdateMessageCommandHandler(

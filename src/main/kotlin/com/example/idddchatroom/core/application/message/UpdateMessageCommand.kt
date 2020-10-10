@@ -1,4 +1,4 @@
-package com.example.idddchatroom.core.application.message.command
+package com.example.idddchatroom.core.application.message
 
 import com.example.idddchatroom.core.domain.message.MessageId
 import com.example.idddchatroom.core.domain.message.MessageSender

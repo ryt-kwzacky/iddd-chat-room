@@ -1,4 +1,4 @@
-package com.example.idddchatroom.core.application.userAccount.command
+package com.example.idddchatroom.core.application.userAccount
 
 import com.example.idddchatroom.core.domain.userAccount.IconImage
 import com.example.idddchatroom.core.domain.userAccount.UserName

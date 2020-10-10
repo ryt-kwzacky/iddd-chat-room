@@ -1,7 +1,7 @@
 package com.example.idddchatroom.unit.application.room
 
 import com.example.idddchatroom.core.application.room.DeleteRoomCommandHandler
-import com.example.idddchatroom.core.application.room.command.DeleteRoomCommand
+import com.example.idddchatroom.core.application.room.DeleteRoomCommand
 import com.example.idddchatroom.core.domain.room.RoomSpecification
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository
@@ -14,7 +14,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import java.time.ZonedDateTime
 
 @RunWith(SpringRunner::class)
 @SpringBootTest

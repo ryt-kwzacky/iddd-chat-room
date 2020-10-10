@@ -1,7 +1,7 @@
 package com.example.idddchatroom.unit.application.room
 
 import com.example.idddchatroom.core.application.room.UpdateRoomLevelCommandHandler
-import com.example.idddchatroom.core.application.room.command.UpdateRoomLevelCommand
+import com.example.idddchatroom.core.application.room.UpdateRoomLevelCommand
 import com.example.idddchatroom.core.domain.room.RoomLevel
 import com.example.idddchatroom.core.infra.message.InMemoryMessageRepository
 import com.example.idddchatroom.core.infra.room.db.InMemoryRoomRepository

@@ -14,7 +14,6 @@ class DeleteRoomCommandHandler(
     fun handle(
         command: DeleteRoomCommand
     ) {
-        // ルームが消えた時どうするの？の条件
         if (!specification.isDeletableRoom(
                 universalUserId = command.universalUserId,
                 roomId = command.roomId)
